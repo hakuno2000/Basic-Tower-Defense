@@ -5,7 +5,7 @@ import game.soldier.SniperSoldier;
 public class SniperTower extends Tower {
 
     public SniperTower(int posX, int posY) {
-        super(posX, posY, "sniper",300,40,200,200);
+        super(posX, posY, "sniper",300,25,200,200);
         setRange(250);
         setShoot(false);
         setActive(true);

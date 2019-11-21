@@ -25,7 +25,6 @@ public abstract class GameStage {
 
     private HUD hud;
 
-    // Load map của level tương ứng
     public GameStage(int k) {
         map = new Image("file:resources/Stage_" + k + ".png");
         brightness = -1;
@@ -35,16 +34,8 @@ public abstract class GameStage {
         hud = new HUD(30,30);
     }
 
-    // Thêm vật trang trí
     public abstract void addOrnament();
 
-    /**
-     * Vẽ màn chơi
-     * Vẽ kẻ địch
-     * Vẽ các tháp
-     * Vẽ vật trang trí
-     * Vẽ các layout
-     */
     public void draw(GraphicsContext gc) {
         gc.setEffect(colorAdjust);
         gc.drawImage(map, 0, -50);
@@ -52,15 +43,12 @@ public abstract class GameStage {
         pause.draw(gc);
         hud.draw(gc);
         for (Tower tower : towers) tower.draw(gc);
-        sortEnemies(false); // Thằng nào thấp hơn thì vẽ sau, tránh bị đè lên nhau
+        sortEnemies(false);
         for (Enemy enemy : enemies) enemy.draw(gc);
         for (GameObject i : ornament) i.draw(gc);
         for (Tower tower: towers) tower.drawLayout(gc);
     }
 
-    /**
-     * Cập nhật màn chơi
-     */
     public void update() {
         if (!isPause && brightness < 0) brightness += 0.05;
         colorAdjust.setBrightness(brightness);
@@ -68,9 +56,8 @@ public abstract class GameStage {
 
         for (int i = 0; i < towers.size(); i++) {
             Tower tower = towers.get(i);
-            // Update tháp
             tower.update();
-            // Nêu tháp được nâng cấp thì set 1 tháp mới thay vào
+
             if (tower.getUpgrade() == 0) {
                 towers.set(i, new NormalTower(towers.get(i).getPosX(), towers.get(i).getPosY()));
                 hud.setCoins(hud.getCoins() - (towers.get(i)).getPrice());
@@ -110,20 +97,15 @@ public abstract class GameStage {
             }
         }
 
-        // Xoá bớt mấy thằng hết máu
         for (int i = 0; i < enemies.size(); i++)
             while (i < enemies.size() && enemies.get(i).getHealthBar().getHealth() <= 0) enemies.remove(i);
 
-        sortEnemies(true);  // Bắn thằng đang đi nhanh nhất
+        sortEnemies(true);
         for (Tower i : towers) i.attack(enemies);
 
         //if (hud.getLife() <= 0) System.exit(0);
     }
 
-    /** Đọc các sự kiện bàn phím chuột
-     *  key = 0: Mouse Position When Clicking
-     *  key = 1: Mouse Position
-     */
     public void input(int key, double mouseX, double mouseY) {
         if (key == 0) {
             if (isPause) {
@@ -149,8 +131,7 @@ public abstract class GameStage {
 
     private boolean cmp(int i, int j, boolean X) {
         if (X && enemies.get(i).getPosX() + enemies.get(i).getWidth() <= enemies.get(j).getPosX() + enemies.get(j).getWidth()) return true;
-        if (!X && enemies.get(i).getPosY() + enemies.get(i).getHeight() <= enemies.get(j).getPosY() + enemies.get(j).getHeight()) return true;
-        return false;
+        return !X && enemies.get(i).getPosY() + enemies.get(i).getHeight() <= enemies.get(j).getPosY() + enemies.get(j).getHeight();
     }
 
     private void sortEnemies(boolean X) {

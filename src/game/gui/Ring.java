@@ -1,5 +1,6 @@
 package game.gui;
 
+import game.enemy.NormalEnemy;
 import game.object.GameObject;
 import game.object.UpdatableObject;
 import game.tower.MachineGunTower;
@@ -27,12 +28,9 @@ public class Ring extends GameObject implements UpdatableObject {
         icons = new Icon[iconAmount];
         if (iconAmount == 4) {
             for (int i = 0; i < iconAmount; i++) icons[i] = new Icon(-100, -100, i);
-//            trụ bắn cung có tầm bắn 150
-            icons[0].setRange(200);
-//            trụ phép có tầm bắn 200
-            icons[1].setRange(250);
-//            trụ ??? có tầm bắn ngắn
-            icons[2].setRange(150);
+            icons[0].setRange(new NormalTower(0, 0).getRange());
+            icons[1].setRange(new SniperTower(0, 0).getRange());
+            icons[2].setRange(new MachineGunTower(0, 0).getRange());
         } else {
             for (int i = 0; i < iconAmount; i++) icons[i] = new Icon(-100, -100, i + 4);
         }
@@ -68,7 +66,6 @@ public class Ring extends GameObject implements UpdatableObject {
         for (Icon icon : icons) icon.draw(gc);
     }
 
-    // Zoom vào cái vòng tròn chọn Icon
     public void update() {
         if (scale < 0.7) {
             scale += 0.1;

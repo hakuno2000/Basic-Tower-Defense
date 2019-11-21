@@ -52,7 +52,6 @@ public class Level1 extends GameStage {
         ornament.add(new GameObject(543, 337, hammerTower));
         ornament.add(new GameObject(-49, 220, overWall));
 
-        // Vẽ 10 cái tháp trống
         towers.add(new EmptyTower(540, 640));
         towers.add(new EmptyTower(250, 550));
         towers.add(new EmptyTower(460, 470));

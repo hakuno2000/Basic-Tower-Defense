@@ -91,7 +91,7 @@ public class Tower extends GameObject implements UpdatableObject, ClickableObjec
     public void attack(ArrayList<Enemy> enemies) {
         if (range == 0) return;
         shoot = false;
-        while (!bullets.isEmpty() && bullets.get(0).isDestroyed()) bullets.remove(0);   // Xóa bớt đạn thừa
+        while (!bullets.isEmpty() && bullets.get(0).isDestroyed()) bullets.remove(0);
         if (lastShootTime + 1000 * speed < System.currentTimeMillis()) {
             lastShootTime = System.currentTimeMillis();
             for (Enemy enemy : enemies) {

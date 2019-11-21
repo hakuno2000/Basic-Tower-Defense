@@ -47,7 +47,6 @@ public class Enemy extends GameObject implements UpdatableObject, AnimateObject 
     public void update() {
         animateUpdate(16);
         if (lastMoveTime + 10 < System.currentTimeMillis()) {
-            //Chia ra các checkpoint để enemy di chuyển
             if (getPosX() >= 850) move(-0.9 * speed, 0);
             if (790 <= getPosX() && getPosX() <= 850) move(-0.5 * speed, -0.75 * speed * path);
             if (750 <= getPosX() && getPosX() <= 790) move(-0.6364 * speed, -0.6364 * speed * path);

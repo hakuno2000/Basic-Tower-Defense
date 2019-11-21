@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-//import jdk.internal.org.objectweb.asm.util.CheckAnnotationAdapter;
 
 
 public class HUD extends GameObject {
@@ -21,7 +20,7 @@ public class HUD extends GameObject {
     public HUD(int posX,int posY){
         super(posX,posY,new Image("file:resources/hud_background.png"));
         this.life = 5;
-        this.coins = 1000;
+        this.coins = 600;
         this.wave = 1;
     }
 
