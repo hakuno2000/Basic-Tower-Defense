@@ -128,8 +128,7 @@ public class Tower extends GameObject implements UpdatableObject, ClickableObjec
     }
 
     public int increaseRank() {
-        if (rank >= 3)
-            rank = 3;
+        if (rank >= 3) return 3;
         else rank++;
         return rank;
     }

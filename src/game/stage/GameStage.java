@@ -72,7 +72,7 @@ public abstract class GameStage {
             }
             else if (tower.getUpgrade() == 4) {
                 tower.upgrade(new Image("file:resources/tower/" + tower.getTag() + "_tower_" + tower.increaseRank() + ".png"));
-                tower.setRange(tower.getRange() + 50);
+                if (tower.getRank() < 3) tower.setRange(tower.getRange() + 50);
                 tower.setUpgrade(-1);
                 if (tower.getRank() < 3){
                     hud.setCoins(hud.getCoins() - tower.getUpgradeprice());
